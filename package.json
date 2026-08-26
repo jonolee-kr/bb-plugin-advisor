@@ -33,7 +33,7 @@
   "type": "module",
   "engines": {
     "bb": ">=0.35",
-    "bbPluginSdk": "^0.4.1"
+    "bbPluginSdk": ">=0.4.16"
   },
   "bb": {
     "name": "Advisor",

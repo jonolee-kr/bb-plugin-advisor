@@ -15031,9 +15031,11 @@ Address this now. Inspect the current state, make the correction, verify it, the
     name: ADVISOR_TOOL,
     description: "Run an independent review-only model pass on this thread and return concrete issues before finalizing.",
     instructions: "For substantial coding work, call advisor_review exactly once after implementation and verification but before the final answer. Address concern/blocker feedback before completing.",
-    experimental_statusLabels: {
-      pending: "Consulting advisor",
-      completed: "Consulted advisor"
+    presentation: {
+      label: {
+        pending: "Consulting advisor",
+        completed: "Consulted advisor"
+      }
     },
     parameters: external_exports.object({
       focus: external_exports.string().max(4e3).default("").describe("What changed, what was verified, and any uncertainty the advisor should examine")

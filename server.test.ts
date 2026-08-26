@@ -2395,3 +2395,30 @@ END_ADVISOR_RESULT`);
     );
   });
 });
+
+describe("advisor_review registration", () => {
+  it("declares its row labels under presentation.label, not experimental_statusLabels", async () => {
+    const { bb } = createFakePluginHost({ pluginId: "advisor" });
+    const registrations: Record<string, unknown>[] = [];
+    const registerTool = bb.agents.registerTool.bind(bb.agents);
+    bb.agents.registerTool = ((tool: Record<string, unknown>) => {
+      registrations.push(tool);
+      return (registerTool as (raw: unknown) => void)(tool);
+    }) as unknown as typeof bb.agents.registerTool;
+
+    await plugin(bb);
+
+    const tool = registrations.find(
+      (registered) => registered.name === "advisor_review",
+    );
+
+    expect(tool).toBeDefined();
+    expect(tool).not.toHaveProperty("experimental_statusLabels");
+    expect(tool?.presentation).toEqual({
+      label: {
+        pending: "Consulting advisor",
+        completed: "Consulted advisor",
+      },
+    });
+  });
+});

@@ -1585,9 +1585,11 @@ export default async function plugin(bb: BbPluginApi) {
       "Run an independent review-only model pass on this thread and return concrete issues before finalizing.",
     instructions:
       "For substantial coding work, call advisor_review exactly once after implementation and verification but before the final answer. Address concern/blocker feedback before completing.",
-    experimental_statusLabels: {
-      pending: "Consulting advisor",
-      completed: "Consulted advisor",
+    presentation: {
+      label: {
+        pending: "Consulting advisor",
+        completed: "Consulted advisor",
+      },
     },
     parameters: z.object({
       focus: z
